@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import Image from 'next/image';
+import HeroWaves from '@/components/HeroWaves';
 import {
   motion,
   useReducedMotion,
@@ -51,18 +51,12 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} id="top" className="relative h-[300vh]">
+
       <div className="sticky top-0 flex h-screen items-center overflow-hidden px-6 pt-28 md:px-10">
-
-        <Image
-          src="/hhholographic.png"
-          alt=""
-          fill
-          priority
-          className="-z-10 object-cover"
-        />
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <HeroWaves />
+        </div>
         <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-ink/40 via-ink/70 to-ink" />
-
-        <div className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-overlay [background-image:url('/hhholographic.png')]" />
 
         <motion.div
           variants={prefersReducedMotion ? undefined : container}

@@ -17,8 +17,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    // Only anchor links (starting with '#') map to a page section —
-    // an external link like a Resume PDF is skipped here on purpose.
+    // anchor links for futrue ref
     const sectionLinks = navLinks.filter((link) => link.href.startsWith('#'));
     const sections = sectionLinks
       .map((link) => document.getElementById(link.href.slice(1)))
@@ -28,10 +27,6 @@ export default function Navbar() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // A section counts as "active" while it's crossing the vertical
-        // center of the viewport, not just the instant it appears —
-        // rootMargin below shrinks the observed area to a thin band
-        // through the middle of the screen.
         const visible = entries.filter((entry) => entry.isIntersecting);
         if (visible.length > 0) {
           const topMost = visible.reduce((a, b) =>
