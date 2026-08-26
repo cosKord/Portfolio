@@ -5,21 +5,23 @@ import { experience, education } from '@/data/content';
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative overflow-hidden border-t border-hairline px-6 py-28 md:px-10">
+    <section id="experience" className="relative overflow-hidden border-t border-hairline px-6 py-10 md:px-10">
 
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-20 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-40 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
       
       <div className="mx-auto h-px w-7xl bg-hairline my-12"/>
 
       <div className="mx-auto max-w-6xl">
         <Reveal>
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-parchment">
             where I have worked
           </p>
           <h2 className="max-w-xl font-serif text-4xl text-parchment md:text-5xl">
-            Experience
+            <span className="bg-gradient bg-clip-text text-transparent">
+              Experience
+            </span>
             <div className="mx-auto h-px w-1xl bg-accent my-5" />
-            </h2>
+          </h2>
         </Reveal>
 
         {experience.map((role, i) => (

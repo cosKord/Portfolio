@@ -56,7 +56,7 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-0 -z-10">
           <HeroWaves />
         </div>
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-ink/40 via-ink/70 to-ink" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-ink/30 via-ink/30 to-accent/50" />
 
         <motion.div
           variants={prefersReducedMotion ? undefined : container}
@@ -72,7 +72,7 @@ export default function Hero() {
           <div className="grid justify-items-center">
             <motion.h1
               style={ prefersReducedMotion ? undefined : { opacity: nameOpacity, y: nameY }}
-              className="col-start-1 row-start-1 text-center font-serif text-[18vw] font-bold leading-[0.9] text-parchment sm:text-9xl md:text-8xl lg:text-[12rem]"
+              className="col-start-1 row-start-1 text-center font-serif text-[18vw] font-bold leading-[0.9] text-parchment [text-shadow:0_2px_24px_rgba(0,0,0,0.4)] sm:text-9xl md:text-8xl lg:text-[12rem]"
             >
             {siteInfo.name}
             </motion.h1>
@@ -80,17 +80,16 @@ export default function Hero() {
             <motion.p
                 aria-hidden="true"
                 style={{ opacity: hiOpacity, y: hiY }}
-                className="col-start-1 row-start-1 max-w-4xl px-4 text-center font-serif text-5xl font-bold leading-snug text-parchment sm:text-6xl md:text-7xl"
-            >
-            <span className="text-accent">Hi, there.</span> I&apos;m an aspiring Full-Stack Developer.
+                className="col-start-1 row-start-1 max-w-4xl px-4 text-center font-serif text-5xl font-bold leading-snug text-parchment [text-shadow:0_2px_24px_rgba(0,0,0,0.6)] sm:text-6xl md:text-7xl">
+               Hi there, I&apos;m an aspiring Full-Stack Developer
             </motion.p>
 
             <motion.p
                 aria-hidden="true"
                 style={{ opacity: wOpacity, y: wY }}
-                className="col-start-1 row-start-1 max-w-4xl px-4 text-center font-serif text-4xl font-bold leading-snug text-parchment sm:text-5xl md:text-6xl"
+                className="col-start-1 row-start-1 max-w-4xl px-4 text-center font-serif text-4xl font-bold leading-snug text-parchment [text-shadow:0_2px_24px_rgba(0,0,0,0.6)] sm:text-5xl md:text-6xl"
             >
-              Take a stroll around.
+              Take a stroll around
             </motion.p>
           </div>
         </motion.div>

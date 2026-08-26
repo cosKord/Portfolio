@@ -40,8 +40,7 @@ export default function About() {
     setActiveCardIndex((i) => (i <= 0 ? maxIndex : i - 1));
   };
 
-  // Autoplay — paused whenever a card's modal is open, and skipped
-  // entirely under prefers-reduced-motion.
+  // this is the autopplay
   useEffect(() => {
     if (!canCarousel || prefersReducedMotion || active) return;
     const id = setInterval(goNext, 4000);
@@ -49,8 +48,7 @@ export default function About() {
   }, [canCarousel, prefersReducedMotion, active, maxIndex]);
 
   const openInterest = (interest: Interest) => {
-    // A real drag that just ended shouldn't also open the card it
-    // happened to land on.
+    
     if (Math.abs(dragDistanceRef.current) > 5) {
       dragDistanceRef.current = 0;
       return;
@@ -78,7 +76,10 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="border-t border-hairline px-6 py-28 md:px-10">
+    <section id="about" className="relative overflow-hidden border-t border-hairline px-6 py-10 md:px-10">
+
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-40 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
+
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">

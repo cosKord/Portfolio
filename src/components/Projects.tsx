@@ -4,13 +4,13 @@ import Reveal from './Reveal';
 import AnimatedBorder from './AnimatedBorder';
 import { projects, siteInfo } from '@/data/content';
 
-export default function SelectedWork() {
+export default function Projects() {
   return (
-    <section id="work" className="relative overflow-hidden border-t border-hairline px-6 py-28 md:px-10">
+    <section id="work" className="relative overflow-hidden border-t border-hairline px-6 py-10 md:px-10">
 
       <div className="mx-auto h-px w-7xl bg-parchment my-12" />
 
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-20 mix-blend-overlay [background-image:url('/uuundulate.svg')]" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-size-[100%] bg-center bg-repeat-x opacity-50 mix-blend-overlay [background-image:url('/uuundulate.svg')]" />
 
       <div className="relative mx-auto max-w-6xl">
         <div className="relative z-10">
@@ -19,8 +19,11 @@ export default function SelectedWork() {
               Projects
             </p>
             <h2 className="max-w-xl font-serif text-4xl text-parchment md:text-5xl">
+              <span className="bg-gradient-2 bg-clip-text text-transparent">
               Systems I&apos;m actively building.
-              <div className="mx-auto h-px w-1xl bg-accent my-5" />
+              </span>
+              
+            <div className="mx-auto h-px w-1xl bg-accent my-5" />
             </h2>
             
           </Reveal>

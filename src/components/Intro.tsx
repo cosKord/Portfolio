@@ -15,17 +15,19 @@ export default function Intro() {
   return (
     <section id="about" className="relative overflow-hidden border-t border-hairline px-6 py-10 md:px-10">
 
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-20 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-40 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
       
       <div className="mx-auto h-px w-7xl bg-hairline my-12" />
       <div className="mx-auto grid max-w-6xl gap-1 md:grid-cols-[1.2fr_1fr]">
         <Reveal>
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-parchment">
             Introduction
           </p>
 
           <h2 className="max-w-lg font-serif text-4xl text-parchment md:text-5xl">
-            Building useful projects, which scale aswell
+            <span className="bg-gradient bg-clip-text text-transparent">
+               Building useful projects, which scale as well
+            </span>
             <div className="mx-auto h-px w-1xl bg-accent my-12" />
           </h2>
         </Reveal>
@@ -68,8 +70,10 @@ export default function Intro() {
         <Reveal delay={0.1}>
           <span className="px-6 font-mono text-[15px] uppercase tracking-widest text-parchment"></span>
             <h2 className="max-w-lg font-serif text-4xl text-parchment md:text-5xl">
-                Contributions.
-                <div className="mx-auto h-px w-1xl bg-accent my-5" />
+                <span className="bg-gradient bg-clip-text text-transparent">
+                  Contributions.
+                </span>
+              <div className="mx-auto h-px w-1xl bg-accent my-5" />
             </h2>
           <span/>
         </Reveal>

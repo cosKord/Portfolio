@@ -29,25 +29,19 @@ export default function Preloader() {
     <>
       <AnimatePresence>
         {loading && (
-          <motion.div
-            key="preloader-content"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="pointer-events-none fixed inset-0 z-[101] flex flex-col items-center justify-center gap-6"
-          >
+          <motion.div key="preloader-content" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}
+            className="pointer-events-none fixed inset-0 z-[101] flex flex-col items-center justify-center gap-6" >
+
             <span className="font-mono text-xs uppercase tracking-[0.3em] text-parchment">
               D<span className="text-accent">.</span>B
             </span>
 
             <div className="h-px w-40 overflow-hidden bg-blue-300">
+
               {!prefersReducedMotion && (
-                <motion.div
-                  className="h-full w-1/2 bg-accent"
-                  animate={{ x: ['-100%', '200%'] }}
-                  transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-                />
+                <motion.div className="h-full w-1/2 bg-accent" animate={{ x: ['-100%', '200%'] }} transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}/>
               )}
+
             </div>
           </motion.div>
         )}

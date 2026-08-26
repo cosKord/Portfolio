@@ -7,10 +7,10 @@ export default function TechStack() {
   const groups = Object.entries(stack);
 
   return (
-    <section id="stack" className="relative overflow-hidden border-t border-hairline px-6 py-28 md:px-10">
+    <section id="stack" className="relative overflow-hidden border-t border-hairline px-6 py-10 md:px-10">
       <div className="mx-auto h-px w-7xl bg-parchment my-12"/>
 
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-20 mix-blend-overlay [background-image:url('/llline.svg')]" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-50 mix-blend-overlay [background-image:url('/llline.svg')]" />
 
       <div className="mx-auto max-w-6xl">
         <Reveal>
@@ -18,8 +18,10 @@ export default function TechStack() {
             Technical stack
           </p>
           <h2 className="max-w-xl font-serif text-4xl text-parchment md:text-5xl">
-            My Tool kit
-            <div className="mx-auto h-px w-1xl bg-accent my-5" />
+            <span className="bg-gradient-2 bg-clip-text text-transparent">
+              My Tool kit
+            </span>
+          <div className="mx-auto h-px w-1xl bg-accent my-5" />
           </h2>
         </Reveal>
 

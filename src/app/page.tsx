@@ -6,7 +6,7 @@ import { frame, cancelFrame, FrameData } from 'framer-motion';
 import Preloader from '@/components/preloader';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import SelectedWork from '@/components/SelectedWork';
+import Projects from '@/components/Projects';
 import Experience from '@/components/Experience';
 import TechnicalStack from '@/components/TechStack';
 import About from '@/components/About';
@@ -37,18 +37,39 @@ export default function Home() {
   const cursor = document.createElement('div');
   cursor.className = 'custom-cursor';
   document.body.appendChild(cursor);
+
+  const cursorRing = document.createElement('div');
+  cursorRing.className = 'custom-cursor-ring';
+  document.body.appendChild(cursorRing);
+
   document.body.classList.add('cursor-none');
 
   const handleMove = (e: MouseEvent) => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
+    cursorRing.style.left = e.clientX + 'px';
+    cursorRing.style.top = e.clientY + 'px';
   };
-  const handleLeave = () => (cursor.style.opacity = '0');
-  const handleEnter = () => (cursor.style.opacity = '1');
+  const handleLeave = () => {
+    cursor.style.opacity = '0';
+    cursorRing.style.opacity = '0';
+  };
+  const handleEnter = () => {
+    cursor.style.opacity = '1';
+    cursorRing.style.opacity = '1';
+  };
+
+  const interactiveEls = document.querySelectorAll('a, button');
+  const onHoverEnter = () => cursorRing.classList.add('is-hovering');
+  const onHoverLeave = () => cursorRing.classList.remove('is-hovering');
 
   document.addEventListener('mousemove', handleMove);
   document.addEventListener('mouseleave', handleLeave);
   document.addEventListener('mouseenter', handleEnter);
+  interactiveEls.forEach((el) => {
+    el.addEventListener('mouseenter', onHoverEnter);
+    el.addEventListener('mouseleave', onHoverLeave);
+  });
 
   return () => {
     cancelFrame(update);
@@ -57,7 +78,12 @@ export default function Home() {
     document.removeEventListener('mousemove', handleMove);
     document.removeEventListener('mouseleave', handleLeave);
     document.removeEventListener('mouseenter', handleEnter);
+    interactiveEls.forEach((el) => {
+      el.removeEventListener('mouseenter', onHoverEnter);
+      el.removeEventListener('mouseleave', onHoverLeave);
+    });
     cursor.remove();
+    cursorRing.remove();
   };
 }, []);
 
@@ -68,7 +94,7 @@ export default function Home() {
         <Navbar />
         <Hero />
         <Intro />
-        <SelectedWork />
+        <Projects />
         <Experience />
         <TechnicalStack />
         <About />

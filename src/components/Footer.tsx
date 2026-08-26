@@ -4,8 +4,12 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-hairline px-6 py-8 md:px-10">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-widest text-muted md:flex-row">
+    <footer className="relative overflow-hidden border-t border-hairline px-6 py-5 md:px-10">
+      <div className="pointer-events-none absolute inset-0 bg-gradient opacity-15 blur-3xl" />
+
+      <div className="absolute inset-0 backdrop-blur-xl backdrop-saturate-150" />
+
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-widest text-muted md:flex-row">
         <span>
           © {year} {siteInfo.name}
         </span>
