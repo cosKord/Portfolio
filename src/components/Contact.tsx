@@ -10,8 +10,8 @@ export default function Contact() {
     <section id="contact" className="relative overflow-hidden border-t border-hairline px-6 py-28 md:px-10">
 
       {/*<div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-20 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />*/}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-size-[100%] bg-center bg-repeat-x opacity-20 ">
-          <HeroWaves />
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-20">
+        <HeroWaves />
       </div>
 
       <div className="mx-auto max-w-6xl text-center">

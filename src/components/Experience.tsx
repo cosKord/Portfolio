@@ -7,9 +7,9 @@ export default function Experience() {
   return (
     <section id="experience" className="relative overflow-hidden border-t border-hairline px-6 py-10 md:px-10">
 
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-40 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
-      
-      <div className="mx-auto h-px w-7xl bg-hairline my-12"/>
+      <div className="pointer-events-none absolute inset-0 z-0 bg-repeat bg-[size:300px_300px] opacity-40 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
+
+      <div className="mx-auto h-px w-7xl bg-hairline my-12" />
 
       <div className="mx-auto max-w-6xl">
         <Reveal>
@@ -47,7 +47,7 @@ export default function Experience() {
           </Reveal>
         ))}
       </div>
-      <div className="mx-auto h-px w-7xl bg-hairline my-12"/>
+      <div className="mx-auto h-px w-7xl bg-hairline my-12" />
     </section>
   );
 }

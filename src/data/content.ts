@@ -101,3 +101,35 @@ export const navLinks = [
   { label: 'Experience', href: '#experience' },
   { label: 'Resume', href: '/resume.pdf' },
 ];
+
+export const cpStats = {
+  summary: {
+    totalSolved: '90+',
+    contests: '7',
+    primaryLanguage: 'C++',
+    focusTopic: 'Arrays & Math',
+  },
+  leetcode: {
+    username: 'Dnyanit',
+    profileUrl: 'https://leetcode.com/u/Dnyanit/',
+    rating: 'Unrated',
+    ranking: '3.8M',
+    totalSolved: 29,
+    breakdown: {
+      easy: 21,
+      medium: 8,
+      hard: 0,
+    },
+  },
+  codeforces: {
+    username: 'Rahul.Gandhi',
+    profileUrl: 'https://codeforces.com/profile/Rahul.Gandhi',
+    rating: '900',
+    maxRating: '930',
+    rank: 'Newbie',
+    maxRank: 'Newbie',
+    contests: 7,
+    totalSolved: 61,
+  },
+};
+

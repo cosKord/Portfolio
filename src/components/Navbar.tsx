@@ -1,16 +1,19 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { navLinks, siteInfo } from '@/data/content';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState<string | null>(null);
-  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      const hero = document.getElementById('top');
+      setScrolled(hero ? hero.getBoundingClientRect().bottom <= 64 : window.scrollY > 24);
+    };
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -27,6 +30,12 @@ export default function Navbar() {
 
     const observer = new IntersectionObserver(
       (entries) => {
+        const hero = document.getElementById('top');
+        if (hero && hero.getBoundingClientRect().bottom > window.innerHeight * 0.5) {
+          setActiveHref(null);
+          return;
+        }
+
         const visible = entries.filter((entry) => entry.isIntersecting);
         if (visible.length > 0) {
           const topMost = visible.reduce((a, b) =>
@@ -43,13 +52,11 @@ export default function Navbar() {
   }, []);
 
   return (
-    <motion.header
-      initial={prefersReducedMotion ? false : { y: -40, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed inset-x-0 top-0 z-50 border-b border-white/10 backdrop-blur-md backdrop-saturate-100 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] transition-colors duration-300 ${
-        scrolled ? 'bg-surface/90' : 'bg-surface/30'
-      }`}
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur-2xl backdrop-saturate-150 transition-colors duration-300 ${scrolled
+          ? 'border-white/[0.08] bg-ink/30 shadow-[0_4px_30px_rgba(0,0,0,0.2)]'
+          : 'border-white/[0.06] bg-ink/15'
+        }`}
     >
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4 md:px-10">
         <a href="#top" className="font-mono text-sm tracking-tight text-parchment">
@@ -67,9 +74,8 @@ export default function Navbar() {
                   href={link.href}
                   target={isAnchor ? undefined : '_blank'}
                   rel={isAnchor ? undefined : 'noopener noreferrer'}
-                  className={`relative py-1 transition-colors ${
-                    isActive ? 'text-accent' : 'text-muted hover:text-parchment'
-                  }`}
+                  className={`relative py-1 transition-colors ${isActive ? 'text-accent' : 'text-muted hover:text-parchment'
+                    }`}
                 >
                   {link.label}
                   {isActive && (
@@ -90,6 +96,6 @@ export default function Navbar() {
           <span className="h-px w-6 bg-parchment" />
         </button>
       </nav>
-    </motion.header>
+    </header>
   );
 }

@@ -12,6 +12,7 @@
 
   --font-serif: var(--font-bodoni), serif;
 }
+
 body {
   background-color: var(--color-ink);
   color: var(--color-parchment);
@@ -27,6 +28,7 @@ body {
   0% {
     stroke-dashoffset: 0;
   }
+
   100% {
     stroke-dashoffset: -1000;
   }
@@ -35,40 +37,13 @@ body {
 .animate-border {
   animation: borderMove 3s linear infinite;
 }
-.cursor-none {
-  cursor: none;
-}
 
-.custom-cursor {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--color-accent);
-  pointer-events: none;
-  mix-blend-mode: difference;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease-out, opacity 0.2s ease;
-}
+@media (pointer: fine) {
 
-.custom-cursor-ring {
-  position: fixed;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--color-accent);
-  pointer-events: none;
-  mix-blend-mode: difference;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: left 0.15s ease-out, top 0.15s ease-out, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
-}
-
-.custom-cursor-ring.is-hovering {
-  width: 44px;
-  height: 44px;
-  opacity: 0.6;
+  body.cursor-none,
+  body.cursor-none * {
+    cursor: none !important;
+  }
 }
 
 

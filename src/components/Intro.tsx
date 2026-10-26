@@ -1,6 +1,7 @@
 'use client';
 
 import Reveal from './Reveal';
+import CodingStats from './CodingStats';
 import { siteInfo } from '@/data/content';
 import dynamic from 'next/dynamic';
 
@@ -15,8 +16,8 @@ export default function Intro() {
   return (
     <section id="about" className="relative overflow-hidden border-t border-hairline px-6 py-10 md:px-10">
 
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-40 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
-      
+      <div className="pointer-events-none absolute inset-0 z-0 bg-repeat bg-[size:300px_300px] opacity-40 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
+
       <div className="mx-auto h-px w-7xl bg-hairline my-12" />
       <div className="mx-auto grid max-w-6xl gap-1 md:grid-cols-[1.2fr_1fr]">
         <Reveal>
@@ -37,29 +38,29 @@ export default function Intro() {
 
             <span className="px-6 font-mono text-[15px] tracking-widest text-parchment">
               <p>
-              I enjoy designing responsive, engaging interfaces that feel
-              intuitive to use and purposeful in every detail. I like turning
-              ideas into polished digital experiences while keeping the
-              underlying code clean, scalable, and maintainable.
+                I enjoy designing responsive, engaging interfaces that feel
+                intuitive to use and purposeful in every detail. I like turning
+                ideas into polished digital experiences while keeping the
+                underlying code clean, scalable, and maintainable.
               </p>
-            <span/>
+              <span />
 
-            <span className="px-6 font-mono text-[15px] tracking-widest text-parchment"></span>
+              <span className="px-6 font-mono text-[15px] tracking-widest text-parchment"></span>
               <p>
-              My current focus is on growing beyond frontend development by
-              strengthening my foundations in DSA and exploring areas like
-              AI/ML, blockchain, and full-stack development.
+                My current focus is on growing beyond frontend development by
+                strengthening my foundations in DSA and exploring areas like
+                AI/ML, blockchain, and full-stack development.
               </p>
-            <span/>
+              <span />
 
-            <span className="px-6 font-mono text-[15px] tracking-widest text-parchment"></span>
+              <span className="px-6 font-mono text-[15px] tracking-widest text-parchment"></span>
               <p>
-              I&apos;m always looking to build projects that challenge me to
-              learn something new, experiment with different technologies, and
-              turn interesting ideas into things that are actually useful.
+                I&apos;m always looking to build projects that challenge me to
+                learn something new, experiment with different technologies, and
+                turn interesting ideas into things that are actually useful.
               </p>
             </span>
-            
+
           </div>
         </Reveal>
       </div>
@@ -69,20 +70,31 @@ export default function Intro() {
       <div className="mx-auto grid max-w-6xl gap-1 md:grid-cols-[1.2fr_1fr]">
         <Reveal delay={0.1}>
           <span className="px-6 font-mono text-[15px] uppercase tracking-widest text-parchment"></span>
-            <h2 className="max-w-lg font-serif text-4xl text-parchment md:text-5xl">
-                <span className="bg-gradient bg-clip-text text-transparent">
-                  Contributions.
-                </span>
-              <div className="mx-auto h-px w-1xl bg-accent my-5" />
-            </h2>
-          <span/>
+          <h2 className="max-w-lg font-serif text-4xl text-parchment md:text-5xl">
+            <span className="bg-gradient bg-clip-text text-transparent">
+              Contributions.
+            </span>
+            <div className="mx-auto h-px w-1xl bg-accent my-5" />
+          </h2>
+          <span />
         </Reveal>
       </div>
 
       <div className="mx-auto max-w-6xl">
         <Reveal delay={0.1}>
-          <div className="flex justify-center">
+          <div className="flex justify-center overflow-x-auto py-2">
             <GitHubCalendar username={siteInfo.github.replace('https://github.com/', '')} />
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.15}>
+          <div className="mt-14">
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-xs uppercase tracking-[0.3em] text-parchment">
+                Problem Solving
+              </span>
+            </div>
+            <CodingStats />
           </div>
         </Reveal>
       </div>

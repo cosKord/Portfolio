@@ -10,7 +10,7 @@ export default function Projects() {
 
       <div className="mx-auto h-px w-7xl bg-parchment my-12" />
 
-      <div className="pointer-events-none absolute inset-0 z-0 bg-size-[100%] bg-center bg-repeat-x opacity-50 mix-blend-overlay [background-image:url('/uuundulate.svg')]" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-50 mix-blend-overlay [background-image:url('/uuundulate.svg')]" />
 
       <div className="relative mx-auto max-w-6xl">
         <div className="relative z-10">
@@ -20,12 +20,12 @@ export default function Projects() {
             </p>
             <h2 className="max-w-xl font-serif text-4xl text-parchment md:text-5xl">
               <span className="bg-gradient-2 bg-clip-text text-transparent">
-              Systems I&apos;m actively building.
+                Systems I&apos;m actively building.
               </span>
-              
-            <div className="mx-auto h-px w-1xl bg-accent my-5" />
+
+              <div className="mx-auto h-px w-1xl bg-accent my-5" />
             </h2>
-            
+
           </Reveal>
 
           <div className="mt-16 grid gap-4 md:grid-cols-2">
@@ -79,7 +79,7 @@ export default function Projects() {
           </div>
 
           <Reveal delay={0.2}>
-            
+
             <a href={siteInfo.github}
               target="_blank"
               rel="noreferrer"
@@ -89,9 +89,9 @@ export default function Projects() {
           </Reveal>
         </div>
       </div>
-    
-    <div className="mx-auto h-px w-7xl bg-parchment my-12"/>
-    
+
+      <div className="mx-auto h-px w-7xl bg-parchment my-12" />
+
     </section>
   );
 }

@@ -48,7 +48,7 @@ export default function About() {
   }, [canCarousel, prefersReducedMotion, active, maxIndex]);
 
   const openInterest = (interest: Interest) => {
-    
+
     if (Math.abs(dragDistanceRef.current) > 5) {
       dragDistanceRef.current = 0;
       return;
@@ -78,7 +78,7 @@ export default function About() {
   return (
     <section id="about" className="relative overflow-hidden border-t border-hairline px-6 py-10 md:px-10">
 
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-40 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-repeat bg-[size:300px_300px] opacity-40 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
 
       <div className="mx-auto max-w-6xl">
         <Reveal>
@@ -202,9 +202,8 @@ export default function About() {
                 key={i}
                 onClick={() => setActiveCardIndex(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                  i === activeCardIndex ? 'bg-accent' : 'bg-hairline'
-                }`}
+                className={`h-1.5 w-1.5 rounded-full transition-colors ${i === activeCardIndex ? 'bg-accent' : 'bg-hairline'
+                  }`}
               />
             ))}
           </div>
@@ -281,9 +280,8 @@ export default function About() {
                             key={i}
                             onClick={() => setImgIndex(i)}
                             aria-label={`Go to image ${i + 1}`}
-                            className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                              i === imgIndex ? 'bg-accent' : 'bg-parchment/30'
-                            }`}
+                            className={`h-1.5 w-1.5 rounded-full transition-colors ${i === imgIndex ? 'bg-accent' : 'bg-parchment/30'
+                              }`}
                           />
                         ))}
                       </div>

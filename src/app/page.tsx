@@ -4,6 +4,7 @@ import Lenis from 'lenis';
 import { useEffect, useRef } from 'react';
 import { frame, cancelFrame, FrameData } from 'framer-motion';
 import Preloader from '@/components/preloader';
+import CustomCursor from '@/components/CustomCursor';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Projects from '@/components/Projects';
@@ -18,80 +19,34 @@ export default function Home() {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-  lenisRef.current = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    orientation: 'vertical',
-    gestureOrientation: 'vertical',
-    smoothWheel: true,
-    wheelMultiplier: 1,
-    syncTouch: false,
-    touchMultiplier: 2,
-  });
-
-  function update(data: FrameData) {
-    lenisRef.current?.raf(data.timestamp);
-  }
-  frame.update(update, true);
-
-  const cursor = document.createElement('div');
-  cursor.className = 'custom-cursor';
-  document.body.appendChild(cursor);
-
-  const cursorRing = document.createElement('div');
-  cursorRing.className = 'custom-cursor-ring';
-  document.body.appendChild(cursorRing);
-
-  document.body.classList.add('cursor-none');
-
-  const handleMove = (e: MouseEvent) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    cursorRing.style.left = e.clientX + 'px';
-    cursorRing.style.top = e.clientY + 'px';
-  };
-  const handleLeave = () => {
-    cursor.style.opacity = '0';
-    cursorRing.style.opacity = '0';
-  };
-  const handleEnter = () => {
-    cursor.style.opacity = '1';
-    cursorRing.style.opacity = '1';
-  };
-
-  const interactiveEls = document.querySelectorAll('a, button');
-  const onHoverEnter = () => cursorRing.classList.add('is-hovering');
-  const onHoverLeave = () => cursorRing.classList.remove('is-hovering');
-
-  document.addEventListener('mousemove', handleMove);
-  document.addEventListener('mouseleave', handleLeave);
-  document.addEventListener('mouseenter', handleEnter);
-  interactiveEls.forEach((el) => {
-    el.addEventListener('mouseenter', onHoverEnter);
-    el.addEventListener('mouseleave', onHoverLeave);
-  });
-
-  return () => {
-    cancelFrame(update);
-    lenisRef.current?.destroy();
-    document.body.classList.remove('cursor-none');
-    document.removeEventListener('mousemove', handleMove);
-    document.removeEventListener('mouseleave', handleLeave);
-    document.removeEventListener('mouseenter', handleEnter);
-    interactiveEls.forEach((el) => {
-      el.removeEventListener('mouseenter', onHoverEnter);
-      el.removeEventListener('mouseleave', onHoverLeave);
+    lenisRef.current = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      syncTouch: false,
+      touchMultiplier: 2,
     });
-    cursor.remove();
-    cursorRing.remove();
-  };
-}, []);
+
+    function update(data: FrameData) {
+      lenisRef.current?.raf(data.timestamp);
+    }
+    frame.update(update, true);
+
+    return () => {
+      cancelFrame(update);
+      lenisRef.current?.destroy();
+    };
+  }, []);
 
   return (
     <main className="relative min-h-screen bg-ink text-parchment">
+      <CustomCursor />
       <Preloader />
+      <Navbar />
       <div className="relative z-10">
-        <Navbar />
         <Hero />
         <Intro />
         <Projects />
