@@ -1,0 +1,44 @@
+.grid {
+  display: grid;
+  width: 100%;
+  gap: clamp(1px, 0.13vw, 2px);
+  mask-image: linear-gradient(to bottom, transparent, #000 11%, #000 88%, transparent);
+  user-select: none;
+}
+
+.cell {
+  aspect-ratio: 1;
+  min-width: 0;
+  border-radius: clamp(1px, 0.08vw, 2px);
+  transition: background-color 420ms ease-out, box-shadow 420ms ease-out;
+}
+
+.empty {
+  background-color: #ffffff08;
+}
+
+.filled {
+  background-color: #cfc3ae;
+}
+
+.particle.empty {
+  background-color: transparent;
+}
+
+.particleDim {
+  background-color: #655f54;
+}
+
+.particleMid {
+  background-color: #938b7e;
+}
+
+.particleBright {
+  background-color: #cfc3ae;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell {
+    transition: none;
+  }
+}

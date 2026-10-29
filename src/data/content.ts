@@ -99,7 +99,8 @@ export const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Work', href: '#work' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Resume', href: '/resume.pdf' },
+  { label: 'Stack', href: '#stack' },
+  { label: 'Resume', href: 'https://drive.google.com/file/d/1tIsQHbvfezWwSiSXKFQIeDogDYgfAIYl/view?usp=sharing' },
 ];
 
 export const cpStats = {

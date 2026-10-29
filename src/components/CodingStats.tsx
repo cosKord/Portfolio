@@ -47,7 +47,7 @@ export default function CodingStats() {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-serif text-2xl text-accent">LeetCode</h3>
-              <p className="mt-1 font-mono text-xs text-muted">@{leetcode.username}</p>
+              <p className="mt-1 text-xs text-muted">@{leetcode.username}</p>
             </div>
 
             <a
@@ -65,21 +65,21 @@ export default function CodingStats() {
 
           <div className="mt-6 grid grid-cols-3 gap-2 border-y border-hairline py-5 text-center">
             <div>
-              <p className="font-mono text-[9px] uppercase tracking-widest text-muted">Solved</p>
+              <p className="text-[9px] uppercase tracking-widest text-muted">Solved</p>
               <p className="mt-2 font-serif text-2xl text-parchment">{leetcode.totalSolved}</p>
             </div>
             <div>
-              <p className="font-mono text-[9px] uppercase tracking-widest text-muted">Rating</p>
+              <p className="text-[9px] uppercase tracking-widest text-muted">Rating</p>
               <p className="mt-2 font-serif text-2xl text-parchment">{leetcode.rating}</p>
             </div>
             <div>
-              <p className="font-mono text-[9px] uppercase tracking-widest text-muted">Global rank</p>
+              <p className="text-[9px] uppercase tracking-widest text-muted">Global rank</p>
               <p className="mt-2 font-serif text-lg text-parchment">{leetcode.ranking}</p>
             </div>
           </div>
 
           <div className="mt-5">
-            <div className="flex justify-between font-mono text-[10px] uppercase tracking-widest text-muted">
+            <div className="flex justify-between text-[10px] uppercase tracking-widest text-muted">
               <span>Difficulty</span>
               <span>{total} problems</span>
             </div>
@@ -90,7 +90,7 @@ export default function CodingStats() {
               <div style={{ width: `${hardPct}%` }} className="bg-accent/25 transition-all duration-500" title={`Hard: ${leetcode.breakdown.hard}`} />
             </div>
 
-            <div className="mt-3 flex items-center justify-between font-mono text-[10px] text-muted">
+            <div className="mt-3 flex items-center justify-between text-[10px] text-muted">
               <span>
                 Easy: {leetcode.breakdown.easy}
               </span>
@@ -110,7 +110,6 @@ export default function CodingStats() {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-serif text-2xl text-accent">Codeforces</h3>
-              <p className="mt-1 font-mono text-xs text-muted">@{codeforces.username}</p>
             </div>
 
             <a
@@ -128,20 +127,20 @@ export default function CodingStats() {
 
           <div className="mt-6 grid grid-cols-3 gap-2 border-y border-hairline py-5 text-center">
             <div>
-              <p className="font-mono text-[9px] uppercase tracking-widest text-muted">Rating</p>
+              <p className="text-[9px] uppercase tracking-widest text-muted">Rating</p>
               <p className="mt-2 font-serif text-2xl text-parchment">{codeforces.rating}</p>
             </div>
             <div>
-              <p className="font-mono text-[9px] uppercase tracking-widest text-muted">Peak</p>
+              <p className="text-[9px] uppercase tracking-widest text-muted">Peak</p>
               <p className="mt-2 font-serif text-2xl text-parchment">{codeforces.maxRating}</p>
             </div>
             <div>
-              <p className="font-mono text-[9px] uppercase tracking-widest text-muted">Contests</p>
+              <p className="text-[9px] uppercase tracking-widest text-muted">Contests</p>
               <p className="mt-2 font-serif text-2xl text-parchment">{codeforces.contests}</p>
             </div>
           </div>
 
-          <div className="mt-5 space-y-3 font-mono text-xs">
+          <div className="mt-5 space-y-3 text-xs">
             <div className="flex items-center justify-between border-b border-hairline/70 pb-3">
               <span className="text-muted">Current rank</span>
               <span className="text-parchment">{codeforces.rank}</span>

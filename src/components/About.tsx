@@ -1,16 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { AnimatePresence, motion, useReducedMotion, PanInfo } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import Reveal from './Reveal';
 import { interests, type Interest } from '@/data/content';
-
-const CARD_WIDTH = 256;
-const GAP = 20;
-const VISIBLE_COUNT = 3;
-const STEP = CARD_WIDTH + GAP;
-const VIEWPORT_WIDTH = VISIBLE_COUNT * CARD_WIDTH + (VISIBLE_COUNT - 1) * GAP;
 
 const rowVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -23,38 +17,14 @@ const rowVariants = {
 
 export default function About() {
   const [active, setActive] = useState<Interest | null>(null);
+  const [openFolder, setOpenFolder] = useState<string | null>(null);
+  const [hoveredFolder, setHoveredFolder] = useState<string | null>(null);
   const [imgIndex, setImgIndex] = useState(0);
-  const [activeCardIndex, setActiveCardIndex] = useState(0);
   const prefersReducedMotion = useReducedMotion();
 
-  const dragDistanceRef = useRef(0);
-
-  const maxIndex = Math.max(0, interests.length - VISIBLE_COUNT);
-  const canCarousel = interests.length > VISIBLE_COUNT;
-
-  const goNext = () => {
-    setActiveCardIndex((i) => (i >= maxIndex ? 0 : i + 1));
-  };
-
-  const goPrev = () => {
-    setActiveCardIndex((i) => (i <= 0 ? maxIndex : i - 1));
-  };
-
-  // this is the autopplay
-  useEffect(() => {
-    if (!canCarousel || prefersReducedMotion || active) return;
-    const id = setInterval(goNext, 4000);
-    return () => clearInterval(id);
-  }, [canCarousel, prefersReducedMotion, active, maxIndex]);
-
-  const openInterest = (interest: Interest) => {
-
-    if (Math.abs(dragDistanceRef.current) > 5) {
-      dragDistanceRef.current = 0;
-      return;
-    }
+  const openInterest = (interest: Interest, index = 0) => {
     setActive(interest);
-    setImgIndex(0);
+    setImgIndex(index);
   };
 
   const closeInterest = () => setActive(null);
@@ -69,14 +39,8 @@ export default function About() {
     setImgIndex((i) => (i - 1 + active.images!.length) % active.images!.length);
   };
 
-  const onTrackDragEnd = (_: unknown, info: PanInfo) => {
-    dragDistanceRef.current = info.offset.x;
-    if (info.offset.x < -60) goNext();
-    else if (info.offset.x > 60) goPrev();
-  };
-
   return (
-    <section id="about" className="relative overflow-hidden border-t border-hairline px-6 py-10 md:px-10">
+    <section id="interests" className="relative overflow-hidden border-t border-hairline px-6 py-10 md:px-10">
 
       <div className="pointer-events-none absolute inset-0 z-0 bg-repeat bg-[size:300px_300px] opacity-40 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />
 
@@ -103,111 +67,95 @@ export default function About() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={rowVariants}
-          className="relative mx-auto mt-16 flex items-center justify-center gap-4"
+          className="relative mx-auto mt-16 grid max-w-[940px] grid-cols-1 justify-items-center gap-x-5 md:grid-cols-2 lg:grid-cols-3"
         >
-          {canCarousel && (
-            <button
-              onClick={goPrev}
-              aria-label="Previous"
-              className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline bg-ink/70 text-parchment transition-colors hover:border-accent hover:text-accent md:flex"
-            >
-              ‹
-            </button>
-          )}
+          {interests.map((interest) => {
+                const isOpen = openFolder === interest.title;
+                const isHovered = hoveredFolder === interest.title;
+                const sheets = interest.images?.slice(0, 3) ?? [null];
 
-          <div
-            className="overflow-hidden"
-            style={{
-              width: '100%',
-              maxWidth: VIEWPORT_WIDTH,
-              WebkitMaskImage:
-                'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
-              maskImage:
-                'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
-            }}
-          >
-            <motion.div
-              drag={canCarousel ? 'x' : false}
-              dragConstraints={{ left: -maxIndex * STEP, right: 0 }}
-              dragElastic={0.15}
-              onDragEnd={onTrackDragEnd}
-              animate={{ x: -activeCardIndex * STEP }}
-              transition={
-                prefersReducedMotion
-                  ? { duration: 0 }
-                  : { type: 'spring', stiffness: 300, damping: 32 }
-              }
-              className="flex gap-5"
-            >
-              {interests.map((interest) => (
-                <motion.button
+                return <motion.div
                   key={interest.title}
                   layoutId={`interest-card-${interest.title}`}
-                  onClick={() => openInterest(interest)}
-                  className="group relative flex h-100 w-64 shrink-0 flex-col justify-between overflow-hidden rounded-lg border border-transparent bg-ink/40 p-5 text-left transition-colors hover:border-accent/60"
+                  onHoverStart={() => setHoveredFolder(interest.title)}
+                  onHoverEnd={() => setHoveredFolder(null)}
+                  onFocusCapture={() => setHoveredFolder(interest.title)}
+                  onBlurCapture={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget)) setHoveredFolder(null);
+                  }}
+                  className="group relative mt-24 h-[280px] w-full max-w-[300px] text-left"
+                  style={{ perspective: 900 }}
                 >
-                  {interest.images && interest.images.length > 0 && (
-                    <motion.div
-                      layoutId={`interest-image-${interest.title}`}
-                      className="absolute inset-0 -z-10"
+                  <div className="pointer-events-none absolute inset-x-2 top-2 h-[76%] rounded-[20px] border border-parchment/25 bg-parchment/10 backdrop-blur-xl" />
+                  <div className="pointer-events-none absolute -top-4 right-2 h-12 w-[46%] rounded-t-[20px] border-x border-t border-parchment/25 bg-parchment/10 backdrop-blur-xl" />
+                  {sheets.map((image, index) => (
+                    <motion.button
+                      key={image ?? 'note'}
+                      type="button"
+                      layoutId={index === 0 ? `interest-image-${interest.title}` : undefined}
+                      onClick={() => {
+                        if (!isOpen) {
+                          setOpenFolder(interest.title);
+                        } else {
+                          openInterest(interest, index);
+                        }
+                      }}
+                      aria-label={isOpen ? `View ${interest.title} ${image ? `image ${index + 1}` : 'details'}` : `Open ${interest.title} folder`}
+                      className="absolute inset-x-2 top-0 h-[78%] overflow-hidden rounded-[20px] border border-parchment/20 bg-surface text-left shadow-[0_8px_22px_rgba(0,0,0,0.24)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      style={{
+                        zIndex: index + 1,
+                        maskImage: 'linear-gradient(to bottom, black 0%, black 72%, transparent 100%)',
+                        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 72%, transparent 100%)',
+                      }}
+                      animate={{
+                        y: isOpen ? -75 - (sheets.length - index - 1) * 10 : index * 10 - (isHovered ? 14 : 0),
+                        x: isOpen ? (index - (sheets.length - 1) / 2) * 17 : 0,
+                        rotate: isOpen ? (index - (sheets.length - 1) / 2) * 7 : 0,
+                      }}
+                      transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 280, damping: 25 }}
                     >
-                      <Image
-                        src={interest.images[0]}
-                        alt=""
-                        fill
-                        className="object-cover"
-                        draggable={false}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent" />
-                    </motion.div>
-                  )}
-
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-accent">
-                      Interest
-                    </span>
-                    {interest.images && interest.images.length > 1 && (
-                      <span className="font-mono text-[10px] text-muted">
-                        {interest.images.length} photos
+                      {image ? (
+                        <Image src={image} alt="" fill sizes="300px" className="object-cover" draggable={false} />
+                      ) : (
+                        <span className="absolute inset-0 flex items-start bg-gradient-to-br from-accent/25 via-surface to-ink p-5 font-mono text-xs leading-relaxed text-parchment">
+                          {interest.description}
+                        </span>
+                      )}
+                      <span className="absolute inset-x-0 top-0 bg-ink/55 px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-parchment">
+                        {interest.title} / {image ? String(index + 1).padStart(2, '0') : 'Notes'}
                       </span>
-                    )}
-                  </div>
+                    </motion.button>
+                  ))}
 
-                  <motion.h3
-                    layoutId={`interest-title-${interest.title}`}
-                    className="font-serif text-2xl leading-snug text-parchment"
+                  <motion.button
+                    type="button"
+                    onClick={() => {
+                      setOpenFolder(isOpen ? null : interest.title);
+                    }}
+                    aria-expanded={isOpen}
+                    aria-label={`${isOpen ? 'Close' : 'Open'} ${interest.title} folder`}
+                    className="absolute inset-x-0 bottom-0 z-10 h-[62%] text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    style={{ transformOrigin: 'bottom center' }}
+                    animate={{ rotateX: isOpen ? -16 : isHovered ? -6 : 0, y: isOpen ? 4 : 0 }}
+                    transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 260, damping: 25 }}
                   >
-                    {interest.title}
-                  </motion.h3>
-                </motion.button>
-              ))}
-            </motion.div>
-          </div>
-
-          {canCarousel && (
-            <button
-              onClick={goNext}
-              aria-label="Next"
-              className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline bg-ink/70 text-parchment transition-colors hover:border-accent hover:text-accent md:flex"
-            >
-              ›
-            </button>
-          )}
+                    <div className="absolute -top-5 left-0 h-8 w-[45%] rounded-t-[18px] border-x border-t border-parchment/20 bg-surface/90 backdrop-blur-[64px]" />
+                    <div className="absolute inset-0 rounded-[20px] border border-parchment/20 bg-surface/90 shadow-[0_12px_28px_rgba(0,0,0,0.3)] backdrop-blur-[64px] transition-colors duration-300 group-hover:bg-surface/95 group-focus-visible:bg-surface/95" />
+                    <div className="relative flex h-full flex-col justify-end p-6">
+                      <span className="mb-2 font-mono text-[10px] uppercase tracking-widest text-accent">
+                        Interest{interest.images?.length ? ` / ${interest.images.length} images` : ''}
+                      </span>
+                      <motion.h3
+                        layoutId={`interest-title-${interest.title}`}
+                        className="font-serif text-3xl leading-snug text-parchment"
+                      >
+                        {interest.title}
+                      </motion.h3>
+                    </div>
+                  </motion.button>
+                </motion.div>;
+              })}
         </motion.div>
-
-        {canCarousel && (
-          <div className="mt-6 flex justify-center gap-1.5">
-            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveCardIndex(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 w-1.5 rounded-full transition-colors ${i === activeCardIndex ? 'bg-accent' : 'bg-hairline'
-                  }`}
-              />
-            ))}
-          </div>
-        )}
       </div>
 
       <AnimatePresence>
@@ -249,6 +197,7 @@ export default function About() {
                         src={active.images[imgIndex]}
                         alt=""
                         fill
+                        sizes="(max-width: 768px) 100vw, 672px"
                         className="object-cover"
                         draggable={false}
                       />

@@ -1,15 +1,15 @@
 import { siteInfo } from '@/data/content';
+import ContributionWordmark from './ContributionWordmark';
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-hairline px-6 py-5 md:px-10">
-      <div className="pointer-events-none absolute inset-0 bg-gradient opacity-15 blur-3xl" />
-
-      <div className="absolute inset-0 backdrop-blur-xl backdrop-saturate-150" />
-
-      <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-widest text-muted md:flex-row">
+    <footer className="relative overflow-hidden bg-ink px-6 pt-8 md:px-10 md:pt-12">
+      <div className="relative mx-auto w-4/5 max-w-[1280px]">
+        <ContributionWordmark />
+      </div>
+      <div className="relative mx-auto mt-8 flex max-w-[1600px] flex-col items-center justify-between gap-4 border-t border-hairline py-5 font-mono text-[11px] uppercase tracking-widest text-muted md:flex-row">
         <span>
           © {year} {siteInfo.name}
         </span>

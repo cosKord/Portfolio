@@ -7,14 +7,15 @@ import HeroWaves from './HeroWaves';
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden border-t border-hairline px-6 py-28 md:px-10">
+    <section id="contact" className="relative overflow-hidden border-t border-hairline px-6 pb-16 pt-28 md:px-10 md:pb-20">
 
       {/*<div className="pointer-events-none absolute inset-0 z-0 bg-[length:100%] bg-center bg-repeat-x opacity-20 mix-blend-overlay [background-image:url('/nnnoise.svg')]" />*/}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-20">
         <HeroWaves />
       </div>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-48 bg-gradient-to-b from-transparent to-ink" />
 
-      <div className="mx-auto max-w-6xl text-center">
+      <div className="relative z-10 mx-auto max-w-6xl text-center">
 
         <Reveal>
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">
